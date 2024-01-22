@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-require('dotenv').config();
+const mongoose = require("mongoose");
+require("dotenv").config();
 
 const cardSchema = new mongoose.Schema({
   front: { type: String, required: true },
@@ -11,4 +11,5 @@ const deckSchema = new mongoose.Schema({
   cards: [cardSchema],
 });
 
-module.exports = mongoose.model('Deck', deckSchema);
+
+module.exports = mongoose.model("Deck", deckSchema, "Deck");

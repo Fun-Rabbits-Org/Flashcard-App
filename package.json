@@ -4,15 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"nodemon ./server/server.js\" \"webpack-dev-server --mode development --open --hot\"",
-    "build": "webpack --mode production"
+    "start": "NODE_ENV=production modemon server/server.js",
+    "build": "NODE_ENV=production webpack",
+    "dev": "NODE_ENV=development nodemon server/server.js & NODE_ENV=development webpack serve --open"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@reduxjs/toolkit": "^2.0.1",
+    "bcrypt": "^5.1.1",
     "bootstrap": "^5.3.2",
     "concurrently": "^8.2.2",
     "cors": "^2.8.5",
