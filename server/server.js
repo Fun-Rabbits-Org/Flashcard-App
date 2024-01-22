@@ -1,32 +1,34 @@
-const express = require("express");
-const cors = require("cors");
-const path = require("path");
+const express = require('express');
+const cors = require('cors');
+const path = require('path');
 const app = express();
 const PORT = 3000;
-const mongoose = require("mongoose");
-const Deck = require("./model");
+const mongoose = require('mongoose');
+const Deck = require('./models/model');
+const userRouter = require('./router/userRouter');
 
-require("dotenv").config();
+require('dotenv').config();
 
-const deckController = require("./DeckController");
-const cardController = require("./CardController");
+const deckController = require('./controllers/DeckController');
+const cardController = require('./controllers/CardController');
 
 app.use(express.json());
 
-app.use(cors({ origin: "*" }));
+app.use(cors({ origin: '*' }));
 
-console.log("this is right before deck controller");
+console.log('this is right before deck controller');
 
-app.use("/", deckController);
-app.use("/deck", cardController);
+app.use('/', userRouter);
+app.use('/', deckController);
+app.use('/deck', cardController);
 
-app.use("*", (req, res) => res.status(404).send("Page not found"));
+app.use('*', (req, res) => res.status(404).send('Page not found'));
 
 app.use((err, req, res, next) => {
   const defaultErr = {
-    log: "Express error handler caught an unknown middlware error",
+    log: 'Express error handler caught an unknown middlware error',
     status: 500,
-    message: { err: "An error occured" },
+    message: { err: 'An error occured' },
   };
 
   const errorObj = Object.assign(defaultErr, err);
