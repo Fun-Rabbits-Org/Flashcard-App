@@ -4,45 +4,44 @@ const path = require('path');
 const app = express();
 const PORT = 3000;
 const mongoose = require('mongoose');
-const Deck = require('./model');
+const Deck = require('./models/model');
+const userRouter = require('./router/userRouter');
 
-//require controllers:
-const deckController = require('./DeckController');
-const cardController = require('./CardController');
+require('dotenv').config();
 
-// Parse JSON incoming
+const deckController = require('./controllers/DeckController');
+const cardController = require('./controllers/CardController');
+
 app.use(express.json());
 
-// Accept requests from any domain - to be updated
 app.use(cors({ origin: '*' }));
 
-// Serve static files and the index.html file
-//app.use('/', express.static(path.join(__dirname, '../client')));
-//renders homepage:
-// app.get('/', function (req, res) {
-//   res.sendFile(path.resolve(__dirname, '../client/index.html'));
-// });
-
-//use controllers
 console.log('this is right before deck controller');
+
+app.use('/', userRouter);
 app.use('/', deckController);
 app.use('/deck', cardController);
 
-// Serve 404 error to all other unknown routes
 app.use('*', (req, res) => res.status(404).send('Page not found'));
 
-// Global error handler
 app.use((err, req, res, next) => {
   const defaultErr = {
     log: 'Express error handler caught an unknown middlware error',
     status: 500,
     message: { err: 'An error occured' },
   };
-  // Use default err mashed with changes from passed in err
+
   const errorObj = Object.assign(defaultErr, err);
   console.log(errorObj.log);
   return res.status(errorObj.status).send(errorObj.message);
 });
 
-// Listen for port
-app.listen(PORT, () => console.log(`Server listening on port: ${PORT}`));
+mongoose
+  .connect(process.env.MONGO_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
+  })
+  .catch((error) => console.log(`${error} did not connect`));
