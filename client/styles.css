@@ -10,6 +10,13 @@ body {
   color: #1d1d1d;
 }
 
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 25px;
+  margin: 0 auto;
+}
+
 ul {
   margin: 0;
   padding: 0;
