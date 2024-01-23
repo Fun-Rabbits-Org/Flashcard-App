@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Calendar from "react-calendar";
+// import Calendar from "react-calendar";
 
 const ProfilePage = () => {
   const [value, onChange] = useState(new Date());
@@ -13,14 +13,16 @@ const ProfilePage = () => {
     <div className="profile-page-wrapper">
       <div className="profile-page-container">firstname_lastname</div>
       <div className="calendar-wrapper">
-        <Calendar
+        {/* <Calendar
           onChange={onChange}
           value={value}
           className="calendar-widget"
           tileClassName={getTileClassName}
           calendarType="US"
-        />
+        /> */}
       </div>
     </div>
   );
 };
+
+export default ProfilePage;

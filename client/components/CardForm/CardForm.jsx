@@ -13,7 +13,6 @@ const CardForm = () => {
 
   const currentDeckID = params.deckId;
 
-  // Create handler function for onSubmit (will need to make a fetch request)
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -29,8 +28,6 @@ const CardForm = () => {
       headers: { "Content-Type": "application/json" },
       body: newCardString,
     });
-
-    // redirect will need to occur from server (Automatically?)
 
     await getDecks();
 

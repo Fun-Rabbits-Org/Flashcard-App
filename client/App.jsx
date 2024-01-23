@@ -26,7 +26,7 @@ const App = () => {
   }, []);
 
   return (
-    <div id="AppContainer">
+    <div id="AppContainer" className="app-container">
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<DeckContainer />} />

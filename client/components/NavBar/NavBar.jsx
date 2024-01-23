@@ -21,7 +21,9 @@ const NavBar = () => {
               coolcards
             </Link>
           </li>
-          <li className="text-red-800">Study</li>
+          <li>
+            <Link className="nav-link">Study</Link>
+          </li>
           <li>
             <div>
               <input
@@ -32,12 +34,16 @@ const NavBar = () => {
             </div>
           </li>
           <li>
-            <Link className="navbar-text" to="/profile">
+            <Link className="nav-link" to="/profile">
               Profile
             </Link>
           </li>
-          <li>Generate</li>
-          <li>Username</li>
+          <li>
+            <Link className="nav-link">Generate</Link>
+          </li>
+          <li>
+            <Link className="nav-link">Username</Link>
+          </li>
         </ul>
       </div>
     </nav>

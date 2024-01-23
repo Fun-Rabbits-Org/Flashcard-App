@@ -30,6 +30,10 @@ a {
   color: black;
 }
 
+.app-container {
+  background-color: #0b092d;
+}
+
 .NavBar {
   width: 100%;
   display: flex;
@@ -39,8 +43,13 @@ a {
   border-bottom: 2px solid #2d3956;
 }
 
-.navbar-text {
-  color: white;
+.nav-link {
+  color: rgb(255, 255, 255);
+  transition: 0.3s;
+}
+
+.nav-link:hover {
+  color: rgb(201, 200, 200);
 }
 
 .menuDiv {
@@ -128,31 +137,33 @@ a {
 .addNewDeck input,
 .addNewDeck button {
   height: 2.3rem;
-  border: 0.18rem solid #2dc6f2;
+  border: none;
   border-radius: 0.4rem;
+  margin-right: 1rem;
 }
 
 .addNewDeck input {
   width: 13rem;
+  height: 2.5rem;
   margin-right: 0.3rem;
   padding-left: 1rem;
 }
 
 .addNewDeck button {
-  color: #2dc6f2;
-  background-color: #ebecee;
+  color: white;
+  background-color: #0b092d;
   cursor: pointer;
 }
 
 .addNewDeck input,
 .addNewDeck input::placeholder {
-  color: #2dc6f2;
-  background-color: #2d3956;
+  color: white;
+  background-color: #0b092d;
 }
 
 .deckSection {
-  width: 60rem;
-  margin: 2.5rem 0;
+  width: 80rem;
+  margin: 2.5rem 1rem;
   padding: 2rem 2rem;
   background-color: #2d3956;
   border-radius: 2rem;
@@ -167,6 +178,12 @@ a {
   width: 16rem;
   margin: 1.3rem;
   cursor: pointer;
+  border-radius: 2rem;
+  transition: 0.3s;
+}
+
+.Deck:hover {
+  scale: 1.04;
 }
 
 .deckColor {
@@ -212,11 +229,12 @@ a {
 }
 
 .card {
+  height: 100vh;
   margin: 7.5rem 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* background-color: #ebecee; */
+  background-color: #0b092d;
 }
 
 .card button,

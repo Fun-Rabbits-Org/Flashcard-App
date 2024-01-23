@@ -2,6 +2,19 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { getDecks } from "../../utils/requests";
 
+import {
+  Box,
+  Typography,
+  Chip,
+  Card,
+  Stack,
+  Divider,
+  Button,
+  Checkbox,
+  Fab,
+} from "@mui/material";
+import { Add, Clear } from "@mui/icons-material";
+
 const Deck = ({ deck, index }) => {
   const navigate = useNavigate();
 
@@ -39,13 +52,45 @@ const Deck = ({ deck, index }) => {
 
   return (
     <div id={`deck${index}`} className="Deck">
-      <div className="deckColor" onClick={handleDeckClick} style={styles}>
-        <h2>{deck.deckName} </h2>
-      </div>
       <div>
-        <button className="delete-deck-button" onClick={handleDelete}>
-          Delete
-        </button>
+        <Card
+          variant="outlined"
+          sx={{
+            maxWidth: 360,
+            borderRadius: "1rem",
+            border: "2px solid #2d3956",
+          }}
+        >
+          <Box sx={{ p: 2 }}>
+            <Stack
+              direction="row"
+              justifyContent="space-between"
+              alignItems="center"
+            >
+              <Typography gutterBottom variant="h5" component="div">
+                {deck.deckName}
+              </Typography>
+              <Checkbox defaultUnChecked color="success" />
+            </Stack>
+            <Typography color="text.secondary" variant="body2">
+              {Math.floor(Math.random() * 100)} cards in this deck
+            </Typography>
+          </Box>
+          <Divider light />
+          <Box sx={{ p: 2 }} style={styles}>
+            <Stack direction="row" spacing={1}>
+              <Button onClick={handleDeckClick} sx={{ width: "auto" }}>
+                <Add />
+              </Button>
+              <Button
+                onClick={handleDelete}
+                sx={{ width: "auto", marginLeft: 0 }}
+              >
+                <Clear />
+              </Button>
+            </Stack>
+          </Box>
+        </Card>
       </div>
     </div>
   );
