@@ -29,8 +29,10 @@ const Layout = () => {
 const NotFound = () => <h1>404 Page not found</h1>;
 
 const App = () => {
+  const [state, setState] = useState(null);
   const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
-  const user = useSelector((state)=> state.user.userInfo)
+  const user = useSelector((state)=> state.userInfo)
+  // setState(useSelector((state)=> state))
   console.log(user, isLoggedIn)
   useEffect(() => {
     getDecks();
@@ -40,14 +42,13 @@ const App = () => {
     const data = window.localStorage.getItem('USERINFO')
     console.log('---------', data)
     if (data!==null){
-      store.dispatch(UserInfoReducer(JSON.parse(data)))
-      store.dispatch(login(true));
+      setState(JSON.parse(data))
     }
   },[])
 
   useEffect(()=>{
-    window.localStorage.setItem('USERINFO',JSON.stringify(user))
-  },[user])
+    window.localStorage.setItem('USERINFO',JSON.stringify(state))
+  },[state])
   
   
   const handleRegister = (e) => {

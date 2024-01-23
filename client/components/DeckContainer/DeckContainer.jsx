@@ -7,13 +7,19 @@ import { getDecks } from "../../utils/requests.js";
 
 // create component body
 const DeckContainer = () => {
+  let renderedDecks = []
+
   const [newDeck, setNewDeck] = useState("");
+  useSelector((state)=> console.log(state.userInfo.decks))
 
-  const decks = useSelector((state) => state.decks.decks);
+  const decks = useSelector((state) => state.userInfo.decks);
 
-  const renderedDecks = decks.map((deck, index) => (
-    <Deck key={deck._id} deck={deck} index={index} />
-  ));
+  if (decks){
+    renderedDecks = decks.map((deck, index) => (
+      <Deck key={deck._id} deck={deck} index={index} />
+    ));
+  }
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,7 +35,6 @@ const DeckContainer = () => {
       if (!response.ok) {
         throw new Error(`Failed to fetch: ${response.statusText}`);
       }
-
       await getDecks();
       setNewDeck("");
     } catch (error) {
@@ -62,6 +67,7 @@ const DeckContainer = () => {
       <section className="deckSection">{renderedDecks}</section>
     </div>
   );
+  
 };
 
 export default DeckContainer;

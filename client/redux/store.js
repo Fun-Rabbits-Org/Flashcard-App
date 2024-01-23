@@ -6,9 +6,7 @@ import UserInfo from './UserInfo';
 
 export const store = configureStore({
   reducer: {
-    decks: decksReducer,
-    currentDeck: currentDeckReducer,
     login: isLoggedIn,
-    user: UserInfo
+    userInfo: UserInfo
   },
 });

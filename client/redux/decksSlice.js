@@ -7,13 +7,13 @@ export const decksSlice = createSlice({
   },
   reducers: {
     loadDecks: (state, action) => {
-      state.decks = action.payload;
+      state.userInfo.decks = action.payload;
     },
     addDeck: (state, action) => {
-      state.decks.push(action.payload);
+      state.userInfo.decks.push(action.payload);
     },
     deleteDeck: (state, action) => {
-      state.decks.filter((deck, index) => {
+      state.userInfo.decks.filter((deck, index) => {
         index !== action.payload;
       });
     },

@@ -15,12 +15,14 @@ export const currentDeckSlice = createSlice({
     },
     addCard: (state, action) => {
       state.cards.push(action.payload);
+      state.userInfo.decks.push(action.payload)
     },
     deleteCard: (state, action) => {
-      state.cards.filter((card, index) => {
+      state.userInfo.cards.filter((card, index) => {
         index !== action.payload;
       });
     },
+    
   },
 });
 
