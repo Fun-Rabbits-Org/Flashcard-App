@@ -70,4 +70,20 @@ router.delete('/:deckId/card', async (req, res) => {
   }
 });
 
+//New Added Feature: Edit Card
+router.put('/:deckId/card', async (req, res) => {
+  try{
+    const deckId = req.params.deckId;
+    //Mock names - (editCardID, cardNameUpdate) - until correct names are given.
+    const{editCardID, cardNameUpdate}  = req.body;
+    console.log('Inc Card Edit: ', cardNameUpdate)
+    //Have to determine if update request is for Front or Back Side of Card.
+    await Deck.findByIdAndUpdate({_id: deckId}, {$set: {front: cardNameUpdate}})
+    res.redirect('/');
+  } catch (error) {
+    console.log('Error editing card');
+    res.status(500).json({error: 'Internal Server Error'});
+  }
+})
+
 module.exports = router;
