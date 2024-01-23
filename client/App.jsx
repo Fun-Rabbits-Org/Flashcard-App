@@ -8,19 +8,20 @@ import CardForm from './components/CardForm/CardForm.jsx';
 import Login from './components/Login/login.js';
 import Signup from './components/Login/Signup.js';
 import { getDecks } from './utils/requests.js';
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from 'react-redux';
 import Authorize from './components/Login/Authorize.js';
 import { store } from './redux/store.js';
 import { UserInfoReducer } from './redux/UserInfo.js';
 import { login } from './redux/isLoggedIn.js';
+
 const Layout = () => {
   const logout = () => {
-    store.dispatch(UserInfoReducer(null))
-    window.localStorage.setItem('USERINFO',null)
-  }
+    store.dispatch(UserInfoReducer(null));
+    window.localStorage.setItem('USERINFO', null);
+  };
   return (
     <>
-      <NavBar logout={logout}/>
+      <NavBar logout={logout} />
       <Outlet />
     </>
   );
@@ -44,7 +45,7 @@ const App = () => {
     if (data!==null){
       setState(JSON.parse(data))
     }
-  },[])
+  }, []);
 
   useEffect(()=>{
     window.localStorage.setItem('USERINFO',JSON.stringify(state))
@@ -52,36 +53,32 @@ const App = () => {
   
   
   const handleRegister = (e) => {
-    e.preventDefault
-    console.log('register clicked')
-    setPage(<Signup handleSignUpSubmit={handleSignUpSubmit} />)
-  }
+    e.preventDefault;
+    console.log('register clicked');
+    setPage(<Signup handleSignUpSubmit={handleSignUpSubmit} />);
+  };
   const handleSignUpSubmit = () => {
-    console.log('login going to')
-    setPage(<Login/>)
-  }
-  if (user===null) store.dispatch(login(false));
+    console.log('login going to');
+    setPage(<Login />);
+  };
+  if (user === null) store.dispatch(login(false));
 
-  
-  
-  const [page, setPage] = useState(<Login handleRegister = {handleRegister}/>)
-  const showPage = isLoggedIn && user!==null ? <Layout/> : page
-        return (
-          <div id="AppContainer">
-            <Routes>
-              <Route path='/' element={
-            showPage
-        }>
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Signup />} />
-                <Route index element={<DeckContainer />} />
-                <Route path="deck/:deckId" element={<Card />} />
-                <Route path="deck/:deckId/addCard" element={<CardForm />} />
-                <Route path="*" element={<NotFound />} />
-              </Route>
-            </Routes>
-          </div>
-        );
+  const [page, setPage] = useState(<Login handleRegister={handleRegister} />);
+  const showPage = isLoggedIn && user !== null ? <Layout /> : page;
+  return (
+    <div id="AppContainer">
+      <Routes>
+        <Route path="/" element={showPage}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Signup />} />
+          <Route index element={<DeckContainer />} />
+          <Route path="deck/:deckId" element={<Card />} />
+          <Route path="deck/:deckId/addCard" element={<CardForm />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </div>
+  );
 };
 
 export default App;

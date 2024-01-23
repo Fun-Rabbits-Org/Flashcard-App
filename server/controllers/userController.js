@@ -48,7 +48,7 @@ userController.verifyUser = async (req, res, next) => {
       expiresIn: '1h',
     });
 
-    res.locals.accessToken = accessToken;
+    res.locals.user = existingUser;
     return next();
   } catch (error) {
     console.log('Error verifying user:', error);
