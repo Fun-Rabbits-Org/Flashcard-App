@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { login } from '../../redux/isLoggedIn';
+import { UserInfoReducer } from '../../redux/UserInfo';
 
-const NavBar = () => {
+const NavBar = ({logout}) => {
   return (
     <nav className="NavBar">
       <div className="menuDiv">
@@ -15,8 +17,8 @@ const NavBar = () => {
           <li>INFO</li>
           <li>DECKS</li>
           <li>
-            <Link className="login" to="/login">
-              LOGIN
+            <Link className='logout' onClick={logout}>
+            LOG OUT
             </Link>
           </li>
         </ul>

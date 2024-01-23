@@ -3,24 +3,18 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+// import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 function Copyright(props) {
   return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
+    <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-
+      
       {new Date().getFullYear()}
       {'.'}
     </Typography>
@@ -31,29 +25,36 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 
-export default function Signup() {
-  const handleSubmit = async (event) => {
+export default function Signup({handleSignUpSubmit}) {
+  const handleSubmit = async(event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const user = {
       username: data.get('username'),
-      password: data.get('password'),
+      password: data.get('password')
     };
+    console.log(user)
     const body = JSON.stringify(user);
+
     try {
-      const response = await fetch('http://localhost:3000/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("http://localhost:3000/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body,
       });
 
       if (!response.ok) {
         throw new Error(`Failed to fetch: ${response.statusText}`);
       }
+      const result = response.json()
+      console.log(result)
+      handleSignUpSubmit()
     } catch (error) {
-      console.error('Error during fetch:', error);
+      console.error("Error during fetch:", error);
     }
+    
   };
+
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -71,14 +72,9 @@ export default function Signup() {
             {/* <LockOutlinedIcon /> */}
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Create Account
           </Typography>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
-          >
+          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
@@ -99,21 +95,21 @@ export default function Signup() {
               id="password"
               autoComplete="current-password"
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Register
+              Create Account
             </Button>
             <Grid container>
-              <Grid item xs></Grid>
-              <Grid item></Grid>
+              <Grid item xs>
+                
+              </Grid>
+              <Grid item>
+                
+              </Grid>
             </Grid>
           </Box>
         </Box>
@@ -121,4 +117,4 @@ export default function Signup() {
       </Container>
     </ThemeProvider>
   );
-}
+};
