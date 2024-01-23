@@ -1,3 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
   box-sizing: border-box;
 }
@@ -33,6 +39,10 @@ a {
   border-bottom: 2px solid #2d3956;
 }
 
+.navbar-text {
+  color: white;
+}
+
 .menuDiv {
   display: flex;
   align-items: center;
@@ -50,8 +60,8 @@ a {
 
 .logo {
   color: white;
-  font-family: cursive;
-  font-size: 1.5rem;
+  font-family: "Quicksand", sans-serif;
+  font-size: 1.8rem;
 }
 
 .searchBar {
@@ -329,4 +339,45 @@ a {
 
 .delete-deck-button {
   background-color: #01b0ef;
+}
+
+.profile-page-wrapper {
+  width: 100%;
+  height: 100vh;
+  background-color: #0b092d;
+  color: white;
+}
+
+.profile-page-container {
+  width: 60%;
+  margin: 0 20rem;
+  padding: 3rem 10rem;
+}
+
+.calendar-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  margin: 0 20rem;
+  background-color: #2d3956;
+  border-radius: 1rem;
+  border: 5rem;
+  padding: 10rem 20rem;
+}
+
+.calendar-widget {
+  background-color: #2d3956;
+  height: 600px;
+  width: 400px;
+}
+
+.weekend {
+  background-color: rgb(207, 207, 207);
+  border-radius: 50%;
+}
+
+.weekday {
+  background-color: white;
+  border-radius: 50%;
 }

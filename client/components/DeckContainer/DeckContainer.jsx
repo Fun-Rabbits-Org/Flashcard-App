@@ -42,7 +42,7 @@ const DeckContainer = () => {
     <div className="DeckContainer">
       <div className="formDiv">
         <div className="deckSquare">
-          <h2>Decks</h2>
+          <h2 className="text-red-800">Decks</h2>
         </div>
 
         <div className="addNewDeck">
