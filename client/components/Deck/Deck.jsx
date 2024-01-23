@@ -5,7 +5,6 @@ import { getDecks } from "../../utils/requests";
 const Deck = ({ deck, index }) => {
   const navigate = useNavigate();
 
-  // create 2 handler functions for clicking into deck and deleting deck
   const handleDeckClick = () => {
     navigate(`/deck/${deck._id}`);
   };
@@ -43,8 +42,11 @@ const Deck = ({ deck, index }) => {
       <div className="deckColor" onClick={handleDeckClick} style={styles}>
         <h2>{deck.deckName} </h2>
       </div>
-
-      <button onClick={handleDelete}>Delete</button>
+      <div>
+        <button className="delete-deck-button" onClick={handleDelete}>
+          Delete
+        </button>
+      </div>
     </div>
   );
 };

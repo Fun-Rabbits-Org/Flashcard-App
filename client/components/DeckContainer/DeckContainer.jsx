@@ -1,69 +1,66 @@
-import React from 'react';
-import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import Deck from '../Deck/Deck.jsx';
+import React, { useEffect } from "react";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import Deck from "../Deck/Deck.jsx";
+import { getDecks } from "../../utils/requests.js";
 
-import { getDecks } from '../../utils/requests.js';
-
-// create component body
 const DeckContainer = () => {
-  const [newDeck, setNewDeck] = useState('');
+  const [newDeck, setNewDeck] = useState("");
 
-  // We need to set up 3 event handler functions for the Deck div, addDeck button and deleteDeck button
-  // These functions will each contain fetch requests
-  // Deck div: GET request to backend endpoint
-  // Add deck: POST request to backend endpoint
-  // Delete deck button: DELETE request to backend endpoint
-
-  // retreive decks from store
   const decks = useSelector((state) => state.decks.decks);
+  const inputSearchCriteria = useSelector(
+    (state) => state.decks.searchCriteria
+  );
 
-  // create functionality to map through backendResponse and have new mapped
-  const renderedDecks = decks.map((deck, index) => (
-    <Deck key={deck._id} deck={deck} index={index} />
-  ));
+  const renderedDecks = decks
+    .filter((deck) => deck.deckName.includes(inputSearchCriteria))
+    .map((deck, index) => <Deck key={deck._id} deck={deck} index={index} />);
 
-  // create function to handle new deck form submissions
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const body = JSON.stringify({ deckName: newDeck, cards: [] });
+    try {
+      const response = await fetch("http://localhost:3000", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body,
+      });
 
-    const response = await fetch('http://localhost:3000', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body,
-    });
+      if (!response.ok) {
+        throw new Error(`Failed to fetch: ${response.statusText}`);
+      }
 
-    if (response.status === 200) {
       await getDecks();
-      setNewDeck('');
+      setNewDeck("");
+    } catch (error) {
+      console.error("Error during fetch:", error);
     }
   };
 
   return (
-    <div className='DeckContainer'>
-      <div className='formDiv'>
-        <div className='deckSquare'>
-          <h2>Decks</h2>
+    <div className="DeckContainer">
+      <div className="formDiv">
+        <div className="deckSquare">
+          <h2 className="text-red-800">Decks</h2>
         </div>
 
-        <div className='addNewDeck'>
+        <div className="addNewDeck">
           <h3>Flashcards</h3>
           <h4>Add a new deck below</h4>
           <form onSubmit={handleSubmit}>
             <input
-              type='text'
-              placeholder='Enter deck name'
+              type="text"
+              placeholder="Enter deck name"
               value={newDeck}
               onChange={(e) => setNewDeck(e.target.value)}
             ></input>
-            <button type='submit'>Add</button>
+            <button type="submit">Add</button>
           </form>
         </div>
       </div>
 
-      <section className='deckSection'>{renderedDecks}</section>
+      <section className="deckSection">{renderedDecks}</section>
     </div>
   );
 };
