@@ -13,8 +13,8 @@ userController.createUser = async (req, res, next) => {
     res.locals.user = newUser;
     return next();
   } catch (err) {
-    console.error('Error creating user:', error);
-    return res.status(401).json({ error: err.message });
+    console.error('Error creating user:', err);
+    return res.status(401).json({ err: err.message });
   }
 };
 
@@ -23,7 +23,7 @@ userController.verifyUser = async (req, res, next) => {
     const { username, password } = req.body;
     const existingUser = await User.findOne({ username: username });
     if (!existingUser) {
-      return res.status(400).json({ error: 'username not found' });
+      return res.status(400).json({ err: 'username not found' });
     }
 
     const correctPassword = await bcrypt.compare(
@@ -37,9 +37,9 @@ userController.verifyUser = async (req, res, next) => {
 
     res.locals.existingUser = existingUser;
     return next();
-  } catch (error) {
-    console.log('Error verifying user:', error);
-    return res.status(400).json({ error: err.message });
+  } catch (err) {
+    console.log('Error verifying user:', err);
+    return res.status(400).json({ err: err.message });
   }
 };
 

@@ -8,6 +8,7 @@ router.post('/register', userController.createUser, (req, res) => {
 });
 
 router.post('/login', userController.verifyUser, (req, res) => {
+  console.log('in login')
   return res.status(200).json(res.locals.existingUser);
 });
 
