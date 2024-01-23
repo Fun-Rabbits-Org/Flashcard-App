@@ -8,9 +8,11 @@ import { BrowserRouter } from 'react-router-dom';
 const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container);
 root.render(
-  <Provider store={store}>
+  <React.StrictMode>
+   <Provider store={store}>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </Provider>
+   </Provider>
+  </React.StrictMode>
 );
