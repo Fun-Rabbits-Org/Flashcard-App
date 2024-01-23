@@ -5,7 +5,8 @@ import NavBar from './components/NavBar/NavBar.jsx';
 import DeckContainer from './components/DeckContainer/DeckContainer.jsx';
 import Card from './components/Card/Card.jsx';
 import CardForm from './components/CardForm/CardForm.jsx';
-
+import Login from './components/Login/login.js';
+import Signup from './components/Login/Signup.js';
 import { getDecks } from './utils/requests.js';
 
 const Layout = () => {
@@ -25,13 +26,15 @@ const App = () => {
   }, []);
 
   return (
-    <div id='AppContainer'>
+    <div id="AppContainer">
       <Routes>
-        <Route path='/' element={<Layout />}>
+        <Route path="/" element={<Layout />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Signup />} />
           <Route index element={<DeckContainer />} />
-          <Route path='deck/:deckId' element={<Card />} />
-          <Route path='deck/:deckId/addCard' element={<CardForm />} />
-          <Route path='*' element={<NotFound />} />
+          <Route path="deck/:deckId" element={<Card />} />
+          <Route path="deck/:deckId/addCard" element={<CardForm />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </div>
