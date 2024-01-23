@@ -19,7 +19,7 @@ app.use(cors({ origin: '*' }));
 console.log('this is right before deck controller');
 
 app.use('/', userRouter);
-// app.use('/', deckRouter);
+app.use('/', deckRouter);
 app.use('/', deckController);
 app.use('/deck', cardController);
 
