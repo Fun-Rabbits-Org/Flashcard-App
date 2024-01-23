@@ -9,6 +9,11 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  decks: { type: Array, default: [] },
+  currentDeck: {
+    id: { type: String, required: true },
+    cards: { type: Array, default: [] },
+  },
 });
 
 const User = mongoose.model('user', userSchema);
