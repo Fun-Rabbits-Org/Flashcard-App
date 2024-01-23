@@ -15,8 +15,8 @@ import { UserInfoReducer } from './redux/UserInfo.js';
 import { login } from './redux/isLoggedIn.js';
 const Layout = () => {
   const logout = () => {
-    store.dispatch(UserInfoReducer({}))
-    store.dispatch(login(false));
+    store.dispatch(UserInfoReducer(null))
+    window.localStorage.setItem('USERINFO',null)
   }
   return (
     <>
@@ -31,6 +31,7 @@ const NotFound = () => <h1>404 Page not found</h1>;
 const App = () => {
   const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
   const user = useSelector((state)=> state.user.userInfo)
+  console.log(user, isLoggedIn)
   useEffect(() => {
     getDecks();
   }, []);
@@ -38,31 +39,32 @@ const App = () => {
   useEffect(()=>{
     const data = window.localStorage.getItem('USERINFO')
     console.log('---------', data)
-    store.dispatch(UserInfoReducer(JSON.parse(data)))
-    store.dispatch(login(true));
+    if (data!==null){
+      store.dispatch(UserInfoReducer(JSON.parse(data)))
+      store.dispatch(login(true));
+    }
   },[])
 
   useEffect(()=>{
     window.localStorage.setItem('USERINFO',JSON.stringify(user))
   },[user])
   
-  const state = useSelector((state) => state);
   
   const handleRegister = (e) => {
     e.preventDefault
-    setPage(<Signup handleSignUpSubmit={handleSignUpSubmit}/>)
+    console.log('register clicked')
+    setPage(<Signup handleSignUpSubmit={handleSignUpSubmit} />)
   }
   const handleSignUpSubmit = () => {
+    console.log('login going to')
     setPage(<Login/>)
   }
+  if (user===null) store.dispatch(login(false));
 
   
   
   const [page, setPage] = useState(<Login handleRegister = {handleRegister}/>)
-  const showPage = isLoggedIn ? <Layout/> : page
-{/* <Route path='/' element={
-            showPage
-        }> */}
+  const showPage = isLoggedIn && user!==null ? <Layout/> : page
         return (
           <div id="AppContainer">
             <Routes>

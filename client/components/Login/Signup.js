@@ -28,6 +28,7 @@ const defaultTheme = createTheme();
 export default function Signup({handleSignUpSubmit}) {
   const handleSubmit = async(event) => {
     event.preventDefault();
+    console.log('---------in fetch-----------')
     const data = new FormData(event.currentTarget);
     const user = {
       username: data.get('username'),
@@ -100,15 +101,23 @@ export default function Signup({handleSignUpSubmit}) {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={handleSignUpSubmit}
             >
               Create Account
             </Button>
             <Grid container>
               <Grid item xs>
-                
+              <Button
+              type=""
+              fullWidth
+              onClick={handleSignUpSubmit}
+              // variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Have an account? Login
+            </Button>  
               </Grid>
               <Grid item>
-                
               </Grid>
             </Grid>
           </Box>

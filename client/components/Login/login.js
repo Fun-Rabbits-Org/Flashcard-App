@@ -40,6 +40,7 @@ export default function Login({handleRegister}) {
   const isLogged = useSelector((state) => state.login.isLoggedIn);
     
   const handleSubmit = async(event) => {
+    console.log('---------in fetch-----------')
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const userINFO = {
@@ -120,15 +121,7 @@ export default function Login({handleRegister}) {
               </Button>
               <Grid container>
                 <Grid item xs>
-                <Button
-                type="submit"
-                fullWidth
-                // variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-                onClick={handleRegister}
-              >
-                Don't have an account? Sign up
-              </Button>
+                
                   
                 </Grid>
                 <Grid item>
@@ -136,6 +129,15 @@ export default function Login({handleRegister}) {
               </Grid>
             </Box>
           </Box>
+          <Button
+                type=""
+                fullWidth
+                // variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                onClick={handleRegister}
+              >
+                Don't have an account? Sign up
+              </Button>
           <Copyright sx={{ mt: 8, mb: 4 }} />
         </Container>
       </ThemeProvider>
