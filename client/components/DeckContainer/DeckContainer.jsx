@@ -1,19 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import Deck from "../Deck/Deck.jsx";
-
 import { getDecks } from "../../utils/requests.js";
 
-// create component body
 const DeckContainer = () => {
   const [newDeck, setNewDeck] = useState("");
 
   const decks = useSelector((state) => state.decks.decks);
+  const inputSearchCriteria = useSelector(
+    (state) => state.decks.searchCriteria
+  );
 
-  const renderedDecks = decks.map((deck, index) => (
-    <Deck key={deck._id} deck={deck} index={index} />
-  ));
+  const renderedDecks = decks
+    .filter((deck) => deck.deckName.includes(inputSearchCriteria))
+    .map((deck, index) => <Deck key={deck._id} deck={deck} index={index} />);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

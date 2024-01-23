@@ -1,9 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 export const decksSlice = createSlice({
-  name: 'decks',
+  name: "decks",
   initialState: {
     decks: [],
+    searchCriteria: "",
   },
   reducers: {
     loadDecks: (state, action) => {
@@ -17,9 +18,13 @@ export const decksSlice = createSlice({
         index !== action.payload;
       });
     },
+    searchInputText: (state, action) => {
+      state.searchCriteria = action.payload;
+    },
   },
 });
 
-export const { loadDecks, addDeck, deleteDeck } = decksSlice.actions;
+export const { loadDecks, addDeck, deleteDeck, searchInputText } =
+  decksSlice.actions;
 
 export default decksSlice.reducer;
