@@ -4,7 +4,6 @@ const router = express.Router();
 const userController = require('../controllers/userController');
 const jwtController = require('../controllers/jwtController');
 
-/*write some tests for this*/
 router.get(
   '/',
   userController.verifyUser,
