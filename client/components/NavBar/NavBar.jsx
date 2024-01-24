@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { store } from '../../redux/store';
-import { searchInputText } from '../../redux/decksSlice';
-import { login } from '../../redux/isLoggedIn';
-import { UserInfoReducer } from '../../redux/UserInfo';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { store } from "../../redux/store";
+import { searchInputText } from "../../redux/decksSlice";
+import { login } from "../../redux/isLoggedIn";
+import { UserInfoReducer } from "../../redux/UserInfo";
+import { useSelector, useDispatch } from "react-redux";
 
 const NavBar = () => {
-  const [cardSearchTerm, setCardSearchTerm] = useState('');
+  const [cardSearchTerm, setCardSearchTerm] = useState("");
 
   const handleSearchInput = (e) => {
     const searchTerm = e.target.value;
@@ -16,10 +16,9 @@ const NavBar = () => {
   };
 
   const logout = () => {
-    console.log('logout clicked');
-    // store.dispatch(UserInfoReducer(null));
-    // store.dispatch(login(false));
-    localStorage.clear();
+    console.log("logout clicked");
+    store.dispatch(UserInfoReducer(null));
+    store.dispatch(login(false));
   };
 
   return (

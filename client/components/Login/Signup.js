@@ -56,7 +56,7 @@ export default function Signup({ handleSignUpSubmit }) {
         throw new Error(`Failed to fetch: ${response.statusText}`);
       }
       const result = response.json();
-      console.log(result);
+      alert('User created. Please log in.');
       handleSignUpSubmit();
     } catch (error) {
       console.error('Error during fetch:', error);
