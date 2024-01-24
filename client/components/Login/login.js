@@ -35,10 +35,10 @@ function Copyright(props) {
 // TODO remove, this demo shouldn't need to reset the theme.
 
 const defaultTheme = createTheme();
-
+let falseUser = '';
 export default function Login({handleRegister}) {
   const isLogged = useSelector((state) => state.login.isLoggedIn);
-    
+  
   const handleSubmit = async(event) => {
     console.log('---------in fetch-----------')
     event.preventDefault();
@@ -56,19 +56,20 @@ export default function Login({handleRegister}) {
         body,
       });
       if (!response.ok) {
+        
         throw new Error(`Failed to fetch: ${response.statusText}`);
       }
-      const user = response.json()
+      const user = await response.json()
       store.dispatch(login(true));
       store.dispatch(UserInfoReducer(userINFO))
       
     } catch (error) {
       console.error("Error during fetch:", error);
+      alert('User not found')
       console.log('error user not found')
       // store.dispatch(login(true));
     }
-  
-    
+    console.log(falseUser)
     
   };
     return (
@@ -90,6 +91,7 @@ export default function Login({handleRegister}) {
               Sign in
             </Typography>
             <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+            <h1>{falseUser}</h1>
               <TextField
                 margin="normal"
                 required
@@ -119,14 +121,6 @@ export default function Login({handleRegister}) {
               >
                 Sign In
               </Button>
-              <Grid container>
-                <Grid item xs>
-                
-                  
-                </Grid>
-                <Grid item>
-                </Grid>
-              </Grid>
             </Box>
           </Box>
           <Button
@@ -142,6 +136,5 @@ export default function Login({handleRegister}) {
         </Container>
       </ThemeProvider>
     ) 
-  
 };
 

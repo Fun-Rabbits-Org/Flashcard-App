@@ -9,6 +9,6 @@ export const store = configureStore({
     decks: decksReducer,
     currentDeck: currentDeckReducer,
     login: isLoggedIn,
-    user: UserInfo
+    userInfo: UserInfo
   },
 });

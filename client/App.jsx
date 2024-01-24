@@ -17,6 +17,7 @@ import { login } from './redux/isLoggedIn.js';
 const Layout = () => {
   const logout = () => {
     store.dispatch(UserInfoReducer(null));
+    store.dispatch(login(false))
     window.localStorage.setItem('USERINFO', null);
   };
   return (
@@ -31,11 +32,9 @@ const NotFound = () => <h1>404 Page not found</h1>;
 
 const App = () => {
   const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
-  const user = useSelector((state) => state.user.userInfo);
+  const user = useSelector((state) => state.userInfo);
   console.log(user, isLoggedIn);
-  useEffect(() => {
-    getDecks();
-  }, []);
+  
 
   useEffect(() => {
     const data = window.localStorage.getItem('USERINFO');
@@ -49,6 +48,10 @@ const App = () => {
   useEffect(() => {
     window.localStorage.setItem('USERINFO', JSON.stringify(user));
   }, [user]);
+
+  useEffect(() => {
+    getDecks();
+  }, []);
 
   const handleRegister = (e) => {
     e.preventDefault;
