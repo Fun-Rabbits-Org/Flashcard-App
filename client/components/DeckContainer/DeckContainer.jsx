@@ -1,15 +1,14 @@
-import React from "react";
-import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import Deck from "../Deck/Deck.jsx";
-
-import { getDecks } from "../../utils/requests.js";
+import React from 'react';
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import Deck from '../Deck/Deck.jsx';
+import { getDecks } from '../../utils/requests.js';
 
 // create component body
 const DeckContainer = () => {
-  const [newDeck, setNewDeck] = useState("");
-
+  const [newDeck, setNewDeck] = useState('');
   const decks = useSelector((state) => state.decks.decks);
+  console.log(decks);
 
   const renderedDecks = decks.map((deck, index) => (
     <Deck key={deck._id} deck={deck} index={index} />
@@ -20,9 +19,9 @@ const DeckContainer = () => {
 
     const body = JSON.stringify({ deckName: newDeck, cards: [] });
     try {
-      const response = await fetch("http://localhost:3000", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch('http://localhost:3000', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body,
       });
 
@@ -31,9 +30,9 @@ const DeckContainer = () => {
       }
 
       await getDecks();
-      setNewDeck("");
+      setNewDeck('');
     } catch (error) {
-      console.error("Error during fetch:", error);
+      console.error('Error during fetch:', error);
     }
   };
 

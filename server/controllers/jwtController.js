@@ -3,13 +3,13 @@ require('dotenv').config();
 
 const jwtController = {};
 
-jwtController.authenticate = async (req, res, next) => {
+jwtController.authenticate = (req, res, next) => {
   try {
     console.log(req.headers);
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
     if (!token) {
-      return res.redirect('/register');
+      return res.status(403).json({ error: 'token expired' });
     }
 
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {

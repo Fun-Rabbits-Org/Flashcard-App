@@ -8,6 +8,12 @@ const userController = {};
 userController.createUser = async (req, res, next) => {
   try {
     const { username, password } = req.body;
+
+    const existingUser = await User.findOne({ username: username });
+    if (existingUser) {
+      return res.status(401).json({ error: 'user already exists' });
+    }
+
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(password, salt);
     const newUser = await User.create({ username, password: hashedPassword });
@@ -48,7 +54,7 @@ userController.verifyUser = async (req, res, next) => {
       expiresIn: '1h',
     });
 
-    res.locals.accessToken = accessToken;
+    res.locals.user = existingUser;
     return next();
   } catch (error) {
     console.log('Error verifying user:', error);
