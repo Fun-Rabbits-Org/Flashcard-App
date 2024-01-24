@@ -40,7 +40,7 @@ const DeckContainer = () => {
   };
 
   const decks = useSelector((state) => state.decks.decks);
-
+  // const username = useSelector((state) => state.user.userInfo);
   const inputSearchCriteria = useSelector(
     (state) => state.decks.searchCriteria
   );
@@ -93,7 +93,7 @@ const DeckContainer = () => {
                   sx={{ bgcolor: red[500], fontFamily: 'Quicksand' }}
                   aria-label="recipe"
                 >
-                  CB
+                  CC
                 </Avatar>
               }
               action={
@@ -101,15 +101,10 @@ const DeckContainer = () => {
                   <MoreVert />
                 </IconButton>
               }
-              title="Cyrus Burns"
+              title="Welcome to coolcards"
+              sx={{ color: 'white' }}
             />
-            <CardMedia
-              component="img"
-              height="194"
-              image="./assets/coolcards-user.jpeg"
-              alt="coolcards"
-            />
-            <img src="./assets/codesmithLogoWhite.png" alt="codesmith" />
+
             <CardContent></CardContent>
             <CardActions disableSpacing>
               <IconButton aria-label="add to favorites">

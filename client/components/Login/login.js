@@ -74,16 +74,23 @@ export default function Login({ handleRegister }) {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            height: '100vh',
+            paddingTop: '5rem',
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             {/* <LockOutlinedIcon /> */}
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography
+            component="h1"
+            variant="h5"
+            sx={{
+              color: 'white',
+            }}
+          >
             Sign in
           </Typography>
           <Box
@@ -93,6 +100,7 @@ export default function Login({ handleRegister }) {
             sx={{ mt: 1 }}
           >
             <TextField
+              variant="filled"
               margin="normal"
               required
               fullWidth
@@ -101,8 +109,12 @@ export default function Login({ handleRegister }) {
               name="username"
               autoComplete="username"
               autoFocus
+              sx={{
+                backgroundColor: 'white',
+              }}
             />
             <TextField
+              variant="filled"
               margin="normal"
               required
               fullWidth
@@ -111,15 +123,27 @@ export default function Login({ handleRegister }) {
               type="password"
               id="password"
               autoComplete="current-password"
+              sx={{
+                backgroundColor: 'white',
+              }}
             />
 
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, backgroundColor: '#2d3956' }}
             >
               Sign In
+            </Button>
+            <Button
+              type=""
+              fullWidth
+              // variant="contained"
+              sx={{ mt: 3, mb: 2, color: 'white' }}
+              onClick={handleRegister}
+            >
+              Don't have an account? Sign up
             </Button>
             <Grid container>
               <Grid item xs></Grid>
@@ -127,15 +151,7 @@ export default function Login({ handleRegister }) {
             </Grid>
           </Box>
         </Box>
-        <Button
-          type=""
-          fullWidth
-          // variant="contained"
-          sx={{ mt: 3, mb: 2 }}
-          onClick={handleRegister}
-        >
-          Don't have an account? Sign up
-        </Button>
+
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>

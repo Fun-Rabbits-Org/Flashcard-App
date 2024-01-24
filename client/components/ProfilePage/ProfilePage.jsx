@@ -1,8 +1,9 @@
-import React from "react";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import React from 'react';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useSelector } from 'react-redux';
 
 const newTheme = (theme) =>
   createTheme({
@@ -11,24 +12,24 @@ const newTheme = (theme) =>
       MuiPickersDay: {
         styleOverrides: {
           root: {
-            color: "#fff",
+            color: '#fff',
             borderRadius: 20,
             borderWidth: 0,
-            borderColor: "#2d3956",
-            border: "0px solid",
-            backgroundColor: "#2d3956",
+            borderColor: '#2d3956',
+            border: '0px solid',
+            backgroundColor: '#2d3956',
           },
         },
       },
       MuiPickersCalendarHeader: {
         styleOverrides: {
           root: {
-            color: "#fff",
+            color: '#fff',
             borderRadius: 20,
             borderWidth: 0,
-            borderColor: "#2d3956",
-            border: "0px solid",
-            backgroundColor: "#2d3956",
+            borderColor: '#2d3956',
+            border: '0px solid',
+            backgroundColor: '#2d3956',
           },
         },
       },
@@ -36,10 +37,12 @@ const newTheme = (theme) =>
   });
 
 const ProfilePage = () => {
+  // const username = useSelector((state) => state.user.userInfo);
+
   return (
     <div className="profile-page-wrapper">
       <div className="profile-page-container">
-        <h1>Cyrus Burns</h1>
+        <h1>Your stats</h1>
       </div>
       <div className="calendar-wrapper">
         <div className="streak-text">
@@ -48,7 +51,7 @@ const ProfilePage = () => {
         <ThemeProvider theme={newTheme}>
           <LocalizationProvider
             dateAdapter={AdapterDayjs}
-            sx={{ color: "white" }}
+            sx={{ color: 'white' }}
           >
             <DateCalendar />
           </LocalizationProvider>

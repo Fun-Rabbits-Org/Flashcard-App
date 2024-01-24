@@ -4,14 +4,22 @@ import { store } from '../../redux/store';
 import { searchInputText } from '../../redux/decksSlice';
 import { login } from '../../redux/isLoggedIn';
 import { UserInfoReducer } from '../../redux/UserInfo';
+import { useSelector, useDispatch } from 'react-redux';
 
-const NavBar = ({ logout }) => {
+const NavBar = () => {
   const [cardSearchTerm, setCardSearchTerm] = useState('');
 
   const handleSearchInput = (e) => {
     const searchTerm = e.target.value;
     setCardSearchTerm(searchTerm);
     store.dispatch(searchInputText(searchTerm));
+  };
+
+  const logout = () => {
+    console.log('logout clicked');
+    // store.dispatch(UserInfoReducer(null));
+    // store.dispatch(login(false));
+    localStorage.clear();
   };
 
   return (
@@ -45,7 +53,7 @@ const NavBar = ({ logout }) => {
           </li>
           <li>
             <Link className="logout" onClick={logout}>
-              LOG OUT
+              Logout
             </Link>
           </li>
         </ul>
