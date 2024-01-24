@@ -27,26 +27,11 @@ const NotFound = () => <h1>404 Page not found</h1>;
 
 const App = () => {
   const user = useSelector((state) => state.user.userInfo);
-  // const [state, setState] = useState(null);
 
-  // useEffect(() => {
-  //   const data = window.localStorage.getItem('USER');
-
-  //   console.log('---------data', data);
-  //   if (data !== null) {
-  //     store.dispatch(UserInfoReducer(JSON.parse(data)));
-  //     store.dispatch(login(true));
-  //   }
-  // }, []);
-
-  useEffect(() => {
-    window.localStorage.setItem('USER', JSON.stringify(user));
-    console.log('--------rendered------');
-  }, [user]);
 
   const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
 
-  // console.log('-----user------------', user, isLoggedIn);
+
 
   useEffect(() => {
     getDecks();
