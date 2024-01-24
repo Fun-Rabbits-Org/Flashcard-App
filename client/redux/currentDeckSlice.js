@@ -1,9 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 export const currentDeckSlice = createSlice({
-  name: 'currentDeck',
+  name: "currentDeck",
   initialState: {
-    id: '',
+    id: "",
     cards: [],
   },
   reducers: {
