@@ -12,9 +12,14 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 function Copyright(props) {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
       {'Copyright © '}
-      
+
       {new Date().getFullYear()}
       {'.'}
     </Typography>
@@ -25,37 +30,35 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 
-export default function Signup({handleSignUpSubmit}) {
-  const handleSubmit = async(event) => {
+export default function Signup({ handleSignUpSubmit }) {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log('---------in fetch-----------')
+    console.log('---------in fetch-----------');
     const data = new FormData(event.currentTarget);
     const user = {
       username: data.get('username'),
-      password: data.get('password')
+      password: data.get('password'),
     };
-    console.log(user)
+    console.log(user);
     const body = JSON.stringify(user);
 
     try {
-      const response = await fetch("http://localhost:3000/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch('http://localhost:3000/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body,
       });
 
       if (!response.ok) {
         throw new Error(`Failed to fetch: ${response.statusText}`);
       }
-      const result = response.json()
-      console.log(result)
-      handleSignUpSubmit()
+      const result = response.json();
+      console.log(result);
+      handleSignUpSubmit();
     } catch (error) {
-      console.error("Error during fetch:", error);
+      console.error('Error during fetch:', error);
     }
-    
   };
-
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -75,7 +78,12 @@ export default function Signup({handleSignUpSubmit}) {
           <Typography component="h1" variant="h5">
             Create Account
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            noValidate
+            sx={{ mt: 1 }}
+          >
             <TextField
               margin="normal"
               required
@@ -101,24 +109,23 @@ export default function Signup({handleSignUpSubmit}) {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              onClick={handleSignUpSubmit}
+              // onClick={handleSignUpSubmit}
             >
               Create Account
             </Button>
             <Grid container>
               <Grid item xs>
-              <Button
-              type=""
-              fullWidth
-              onClick={handleSignUpSubmit}
-              // variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Have an account? Login
-            </Button>  
+                <Button
+                  type=""
+                  fullWidth
+                  onClick={handleSignUpSubmit}
+                  // variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                >
+                  Have an account? Login
+                </Button>
               </Grid>
-              <Grid item>
-              </Grid>
+              <Grid item></Grid>
             </Grid>
           </Box>
         </Box>
@@ -126,4 +133,4 @@ export default function Signup({handleSignUpSubmit}) {
       </Container>
     </ThemeProvider>
   );
-};
+}

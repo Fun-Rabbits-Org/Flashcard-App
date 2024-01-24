@@ -6,8 +6,10 @@ import React from 'React';
 import { Provider } from 'react-redux';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import { store } from './client/redux/store';
-import App from './client/App';
+import { store } from './store';
+import App from '../App';
+import isLoggedIn from "./isLoggedIn";
+
 
 describe('React-Redux integration tests', () => {
   describe('Empty state before interactions', () => {
@@ -24,9 +26,5 @@ describe('React-Redux integration tests', () => {
     test('The page loads with Add button', () => {
       expect(screen.getByRole('button', { name: 'Sign In' }));
     });
-
-    //   test('The page loads with Add button', () => {
-    //     expect(screen.getByRole('button', { name: 'Add' }));
-    //   });
   });
 });
