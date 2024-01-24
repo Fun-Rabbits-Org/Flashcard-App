@@ -8,7 +8,7 @@ router.post('/register', userController.createUser, (req, res) => {
 });
 
 router.post('/login', userController.verifyUser, (req, res) => {
-  return res.status(200).json(res.locals.existingUser);
+  return res.status(200).json(res.locals.user);
 });
 
 module.exports = router;

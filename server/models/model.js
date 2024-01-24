@@ -11,4 +11,4 @@ const deckSchema = new mongoose.Schema({
   cards: [cardSchema],
 });
 
-module.exports = mongoose.model('Deck', deckSchema, 'Deck');
+module.exports = mongoose.model('Deck', deckSchema);

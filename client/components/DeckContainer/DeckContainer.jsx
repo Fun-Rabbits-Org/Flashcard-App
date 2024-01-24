@@ -1,15 +1,12 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Deck from "../Deck/Deck.jsx";
-
 import { getDecks } from "../../utils/requests.js";
 
 // create component body
 const DeckContainer = () => {
   const [newDeck, setNewDeck] = useState("");
-
-  const decks = useSelector((state) => state.decks.decks);
 
   const renderedDecks = decks.map((deck, index) => (
     <Deck key={deck._id} deck={deck} index={index} />

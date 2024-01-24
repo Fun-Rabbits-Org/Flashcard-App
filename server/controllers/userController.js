@@ -1,5 +1,7 @@
 const { User } = require('../models/userModel');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 const userController = {};
 
@@ -12,9 +14,9 @@ userController.createUser = async (req, res, next) => {
     console.log(`new user created: ${newUser}`);
     res.locals.user = newUser;
     return next();
-  } catch (err) {
+  } catch (error) {
     console.error('Error creating user:', error);
-    return res.status(401).json({ error: err.message });
+    return res.status(401).json({ error: error.message });
   }
 };
 
@@ -31,15 +33,26 @@ userController.verifyUser = async (req, res, next) => {
       existingUser.password
     );
 
+    console.log('correct password!', correctPassword);
+
     if (!correctPassword) {
       return res.status(400).json({ message: 'incorrect password' });
     }
 
-    res.locals.existingUser = existingUser;
+    const payload = {
+      userId: existingUser._id,
+      username: existingUser.username,
+    };
+
+    const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
+      expiresIn: '1h',
+    });
+
+    res.locals.user = existingUser;
     return next();
   } catch (error) {
     console.log('Error verifying user:', error);
-    return res.status(400).json({ error: err.message });
+    return res.status(400).json({ error: error.message });
   }
 };
 
