@@ -41,6 +41,7 @@ const DeckContainer = () => {
   };
 
   const decks = useSelector((state) => state.decks.decks);
+
   const inputSearchCriteria = useSelector(
     (state) => state.decks.searchCriteria
   );
@@ -89,7 +90,10 @@ const DeckContainer = () => {
           >
             <CardHeader
               avatar={
-                <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                <Avatar
+                  sx={{ bgcolor: red[500], fontFamily: "Quicksand" }}
+                  aria-label="recipe"
+                >
                   CB
                 </Avatar>
               }

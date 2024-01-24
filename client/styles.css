@@ -6,13 +6,14 @@
 
 * {
   box-sizing: border-box;
+  font-family: "Quicksand", sans-serif;
 }
 
 body {
   margin: 0;
   position: relative;
   background-color: #ebecee;
-  font-family: "Proxima Nova", "San Francisco", arial, sans-serif;
+  font-family: "Quicksand", sans-serif;
   color: #1d1d1d;
 }
 
@@ -162,6 +163,7 @@ a {
 }
 
 .deckSection {
+  font-family: "Quicksand", sans-serif;
   width: 80rem;
   margin: 2.5rem 1rem;
   padding: 2rem 2rem;
@@ -219,14 +221,16 @@ a {
 } */
 
 .Deck button {
-  background-color: rgb(97, 97, 97);
   border: none;
   color: lightgrey;
   cursor: pointer;
-  border-radius: 0.5rem;
   width: 5rem;
   height: 2rem;
 }
+
+/* .Deck button:hover {
+  background-color: lightgrey;
+} */
 
 .card {
   height: 100vh;
@@ -376,12 +380,11 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 40%;
-  margin: 0 20rem;
   background-color: #2d3956;
   border-radius: 1rem;
-  border: 5rem;
-  padding: 10rem 20rem;
+  margin: 0 20rem;
+  padding: 5rem 0;
+  color: white;
 }
 
 .calendar-widget {
@@ -398,4 +401,8 @@ a {
 .weekday {
   background-color: white;
   border-radius: 50%;
+}
+
+.streak-text {
+  margin: 10rem;
 }

@@ -75,4 +75,27 @@ router.get("/deck/:deckId", async (req, res, next) => {
     });
 });
 
+// New Added Feature: Edit Deck name
+router.put('/deck/:deckId', async (req, res) => {
+  const deckId = req.params.deckId;
+  const { editedDeckTitle } = req.body;
+
+  await Deck.findByIdAndUpdate(
+    { _id: deckId },
+    { $set: { deckName: editedDeckTitle } }
+  )
+    .then((data) => {
+      console.log(`Will update with: ${data}`);
+      res.locals.updateDeckName = data;
+      return res.status(200).json(res.locals.updateDeckName);
+    })
+    .catch((error) => {
+      return next({
+        log: 'Express error handler caught in DeckController.put',
+        status: 400,
+        message: { error: `${error}` },
+      });
+    });
+});
+
 module.exports = router;
