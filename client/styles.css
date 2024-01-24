@@ -1,12 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
   box-sizing: border-box;
+  font-family: 'Quicksand', sans-serif;
 }
 
 body {
   margin: 0;
   position: relative;
   background-color: #ebecee;
-  font-family: 'Proxima Nova', 'San Francisco', arial, sans-serif;
+  font-family: 'Quicksand', sans-serif;
   color: #1d1d1d;
 }
 
@@ -24,13 +31,26 @@ a {
   color: black;
 }
 
+.app-container {
+  background-color: #0b092d;
+}
+
 .NavBar {
-  /* position: fixed; */
   width: 100%;
   display: flex;
   justify-content: space-between;
   padding: 1rem 10.8rem 1rem 8.5rem;
-  background-color: #2dc6f2;
+  background-color: #0b092d;
+  border-bottom: 2px solid #2d3956;
+}
+
+.nav-link {
+  color: rgb(255, 255, 255);
+  transition: 0.3s;
+}
+
+.nav-link:hover {
+  color: rgb(201, 200, 200);
 }
 
 .menuDiv {
@@ -50,18 +70,19 @@ a {
 
 .logo {
   color: white;
-  font-family: cursive;
-  font-size: 1.5rem;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.8rem;
 }
 
 .searchBar {
-  width: 17rem;
+  width: 57rem;
   height: 2.2rem;
-  background-color: #6ed0f4;
+  background-color: #2d3956;
   border: none;
   border-radius: 0.4rem;
   color: white;
   padding: 0 1rem;
+  font-size: large;
 }
 
 .searchBar::placeholder {
@@ -70,21 +91,20 @@ a {
 }
 
 .DeckContainer {
-  background-color: #ebecee;
+  background-color: #0b092d;
   height: 100%;
   display: flex;
   justify-content: space-around;
 }
 
 .formDiv {
-  /* padding: 7.5rem 0; */
   padding: 2.5rem 0;
 }
 
 .deckSquare {
-  width: 17rem;
-  height: 20rem;
-  background-color: #01b0ef;
+  width: 25rem;
+  height: 15rem;
+  background-color: #2d3956;
   border-radius: 2rem;
   display: flex;
   justify-content: center;
@@ -118,34 +138,36 @@ a {
 .addNewDeck input,
 .addNewDeck button {
   height: 2.3rem;
-  border: 0.18rem solid #2dc6f2;
+  border: none;
   border-radius: 0.4rem;
+  margin-right: 1rem;
 }
 
 .addNewDeck input {
   width: 13rem;
+  height: 2.5rem;
   margin-right: 0.3rem;
   padding-left: 1rem;
 }
 
 .addNewDeck button {
-  color: #2dc6f2;
-  background-color: #ebecee;
+  color: white;
+  background-color: #0b092d;
   cursor: pointer;
 }
 
 .addNewDeck input,
 .addNewDeck input::placeholder {
-  color: #2dc6f2;
-  background-color: #e6e7ea;
+  color: white;
+  background-color: #0b092d;
 }
 
 .deckSection {
-  width: 60rem;
-  /* margin: 7.5rem 0; */
-  margin: 2.5rem 0;
+  font-family: 'Quicksand', sans-serif;
+  width: 80rem;
+  margin: 2.5rem 1rem;
   padding: 2rem 2rem;
-  background-color: white;
+  background-color: #2d3956;
   border-radius: 2rem;
   display: flex;
   flex-wrap: wrap;
@@ -154,44 +176,72 @@ a {
 .Deck {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
+  height: 10rem;
   width: 16rem;
   margin: 1.3rem;
   cursor: pointer;
+  border-radius: 2rem;
+  transition: 0.3s;
+}
+
+.Deck:hover {
+  scale: 1.04;
 }
 
 .deckColor {
   width: 16rem;
   height: 19rem;
-  border-radius: 2rem;
+  border-radius: 0.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
   box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.1);
 }
 
+.delete-deck-button {
+  background-color: #01b0ef;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  width: 5rem;
+  height: 2rem;
+  margin-top: 00.5rem;
+}
+
 .deckColor h2 {
-  font-size: 3rem;
+  padding: -2rem 2rem;
+  font-size: 2rem;
   color: white;
   margin: 0;
 }
 
+/* .Deck button {
+  display: none;
+} */
+
 .Deck button {
-  background-color: white;
   border: none;
   color: lightgrey;
   cursor: pointer;
+  width: 5rem;
+  height: 2rem;
 }
 
-.Card {
+/* .Deck button:hover {
+  background-color: lightgrey;
+} */
+
+.card {
+  height: 100vh;
   margin: 7.5rem 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* background-color: #ebecee; */
+  background-color: #0b092d;
 }
 
-.Card button,
+.card button,
 .addCardLink {
   width: 5rem;
   height: 2.5rem;
@@ -202,7 +252,7 @@ a {
   cursor: pointer;
 }
 
-.Card button:disabled {
+.card button:disabled {
   border: 0.18rem solid lightgray;
   background-color: lightgray;
   color: whitesmoke;
@@ -239,13 +289,39 @@ a {
   cursor: pointer;
 }
 
-.cardBack {
+.flashcard {
+  transform-style: preserve-3d;
+  transition: 0.3s;
+  transform: perspective(1000px) rotateX(var(--rotate-x, 0));
+}
+
+.flashcard.flip {
+  --rotate-x: 180deg;
+}
+
+.card .card-back,
+.card .card-front {
+  position: absolute;
+}
+
+.card .card-back {
+  transform: rotateX(180deg);
+  position: absolute;
+}
+
+.flashcard:hover {
+  scale: 1.03;
+}
+
+.card-back {
   color: #2dc6f2;
+}
+
+.card-front {
 }
 
 .backAndNext {
   display: flex;
-  /* justify-content: space-around; */
   margin-top: 4rem;
 }
 
@@ -281,6 +357,58 @@ a {
   background-color: #2dc6f2;
   color: white;
   cursor: pointer;
+}
+
+.delete-deck-button {
+  background-color: #01b0ef;
+}
+
+.profile-page-wrapper {
+  width: 100%;
+  height: 100vh;
+  background-color: #0b092d;
+  color: white;
+}
+
+.profile-page-container {
+  width: 60%;
+  margin: 0 20rem;
+  padding: 3rem 10rem;
+}
+
+.calendar-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #2d3956;
+  border-radius: 1rem;
+  margin: 0 20rem;
+  padding: 5rem 0;
+  color: white;
+}
+
+.calendar-widget {
+  background-color: #2d3956;
+  height: 600px;
+  width: 400px;
+}
+
+.weekend {
+  background-color: rgb(207, 207, 207);
+  border-radius: 50%;
+}
+
+.weekday {
+  background-color: white;
+  border-radius: 50%;
+}
+
+.streak-text {
+  margin: 10rem;
+}
+
+.logout {
+  color: white;
 }
 
 .logout {
