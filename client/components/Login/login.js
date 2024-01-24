@@ -1,4 +1,5 @@
-import * as React from 'react';
+// import * as React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Avatar,
   Button,
@@ -7,14 +8,14 @@ import {
   Box,
   Typography,
   Container,
-} from '@mui/material';
+} from "@mui/material";
 
-import CssBaseline from '@mui/material/CssBaseline';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useSelector } from 'react-redux';
-import { store } from '../../redux/store';
-import { login } from '../../redux/isLoggedIn';
-import { UserInfoReducer } from '../../redux/UserInfo';
+import CssBaseline from "@mui/material/CssBaseline";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useSelector } from "react-redux";
+import { store } from "../../redux/store";
+import { login } from "../../redux/isLoggedIn";
+import { UserInfoReducer } from "../../redux/UserInfo";
 
 function Copyright(props) {
   return (
@@ -24,10 +25,10 @@ function Copyright(props) {
       align="center"
       {...props}
     >
-      {'Copyright © '}
+      {"Copyright © "}
 
       {new Date().getFullYear()}
-      {'.'}
+      {"."}
     </Typography>
   );
 }
@@ -37,22 +38,22 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function Login({ handleRegister }) {
-  const isLogged = useSelector((state) => state.login.isLoggedIn);
+  const [falseUser, setFalseUser] = useState(false);
 
   const handleSubmit = async (event) => {
-    console.log('---------in fetch-----------');
+    console.log("---------in fetch-----------");
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const userINFO = {
-      username: data.get('username'),
-      password: data.get('password'),
+      username: data.get("username"),
+      password: data.get("password"),
     };
     console.log(userINFO);
     const body = JSON.stringify(userINFO);
     try {
-      const response = await fetch('http://localhost:3000/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("http://localhost:3000/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body,
       });
       if (!response.ok) {
@@ -62,9 +63,10 @@ export default function Login({ handleRegister }) {
       store.dispatch(login(true));
       store.dispatch(UserInfoReducer(userINFO));
     } catch (error) {
-      alert('User not found');
-      console.error('Error during fetch:', error);
-      console.log('error user not found');
+      setFalseUser(true);
+      // alert("User not found");
+      console.error("Error during fetch:", error);
+      console.log("error user not found");
       // store.dispatch(login(true));
     }
   };
@@ -74,21 +76,21 @@ export default function Login({ handleRegister }) {
         <CssBaseline />
         <Box
           sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            height: '100vh',
-            paddingTop: '5rem',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            height: "100vh",
+            paddingTop: "5rem",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             {/* <LockOutlinedIcon /> */}
           </Avatar>
           <Typography
             component="h1"
             variant="h5"
             sx={{
-              color: 'white',
+              color: "white",
             }}
           >
             Sign in
@@ -110,7 +112,7 @@ export default function Login({ handleRegister }) {
               autoComplete="username"
               autoFocus
               sx={{
-                backgroundColor: 'white',
+                backgroundColor: "white",
               }}
             />
             <TextField
@@ -124,15 +126,28 @@ export default function Login({ handleRegister }) {
               id="password"
               autoComplete="current-password"
               sx={{
-                backgroundColor: 'white',
+                backgroundColor: "white",
               }}
             />
+            {falseUser ? (
+              <Typography
+                component="h1"
+                variant="h5"
+                sx={{
+                  color: "red",
+                  fontSize: "18px",
+                  textAlign: "center",
+                }}
+              >
+                User not found
+              </Typography>
+            ) : null}
 
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2, backgroundColor: '#2d3956' }}
+              sx={{ mt: 3, mb: 2, backgroundColor: "#2d3956" }}
             >
               Sign In
             </Button>
@@ -140,15 +155,12 @@ export default function Login({ handleRegister }) {
               type=""
               fullWidth
               // variant="contained"
-              sx={{ mt: 3, mb: 2, color: 'white' }}
+              sx={{ mt: 3, mb: 2, color: "white" }}
               onClick={handleRegister}
             >
               Don't have an account? Sign up
             </Button>
-            <Grid container>
-              <Grid item xs></Grid>
-              <Grid item></Grid>
-            </Grid>
+            
           </Box>
         </Box>
 
